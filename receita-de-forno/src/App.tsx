@@ -1,14 +1,8 @@
 
+import Catalogo from "./pages/Catalogo";
 
 function App() {
-
-  return (
-    <>
-      <section>
-        <h1>Olá Mundoi!</h1>
-      </section>
-    </>
-  )
+  return <Catalogo />;
 }
 
-export default App
+export default App;
