@@ -1,4 +1,3 @@
-
 import { useEffect, useMemo, useState } from "react";
 import { getRecipes } from "../services/recipes";
 import type { Recipe } from "../types/Recipe";
@@ -28,7 +27,7 @@ function Catalogo() {
 
   const cuisines = useMemo(
     () => [...new Set(recipes.map((recipe) => recipe.cuisine))].sort(),
-    [recipes]
+    [recipes],
   );
 
   const filteredRecipes = recipes.filter((recipe) => {
@@ -46,7 +45,7 @@ function Catalogo() {
     setFavorites((currentFavorites) =>
       currentFavorites.includes(id)
         ? currentFavorites.filter((favoriteId) => favoriteId !== id)
-        : [...currentFavorites, id]
+        : [...currentFavorites, id],
     );
   }
 
@@ -102,11 +101,11 @@ function Catalogo() {
             return (
               <article key={recipe.id}>
                 <img src={recipe.image} alt={recipe.name} width="200" />
-                <h2>{recipe.name}</h2>
+                <a href={`/receitas/${recipe.id}`}>Ver receita</a>
                 <p>Culinária: {recipe.cuisine}</p>
                 <p>
-                  Tempo total:{" "}
-                  {recipe.prepTimeMinutes + recipe.cookTimeMinutes} minutos
+                  Tempo total: {recipe.prepTimeMinutes + recipe.cookTimeMinutes}{" "}
+                  minutos
                 </p>
                 <button
                   type="button"
