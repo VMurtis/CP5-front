@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, Clock, ChefHat, Utensils, CookingPot } from "lucide-react";
@@ -45,14 +44,17 @@ function DetalheReceita() {
 
   if (error || !recipe) {
     return (
-      <main className="min-h-screen bg-white p-10 text-black dark:bg-gray-950 dark:text-white">
+      <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white p-10 text-center text-black dark:bg-gray-950 dark:text-white">
         <CookingPot size={48} className="text-orange-500" />
+
         <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
           Receita não encontrada
         </h2>
+
         <p className="text-gray-600 dark:text-gray-300">
           Não conseguimos carregar essa receita. Tente novamente pelo catálogo.
         </p>
+
         <Link
           to="/"
           className="rounded-xl bg-orange-500 px-5 py-3 font-semibold text-white transition hover:bg-orange-600"
