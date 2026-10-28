@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Catalogo from "./pages/Catalogo";
 import DetalheReceita from "./pages/DetalheReceita";
 import Cabecalho from "./components/Cabecalho";
+import Rodape from "./components/Rodape";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           }
         />
       </Routes>
+      <Rodape />
     </BrowserRouter>
   );
 }
