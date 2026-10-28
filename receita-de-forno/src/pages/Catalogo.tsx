@@ -1,3 +1,4 @@
+
 import { useEffect, useMemo, useState } from "react";
 import { getRecipes } from "../services/recipes";
 import type { Recipe } from "../types/Recipe";
@@ -27,7 +28,7 @@ function Catalogo() {
 
   const cuisines = useMemo(
     () => [...new Set(recipes.map((recipe) => recipe.cuisine))].sort(),
-    [recipes],
+    [recipes]
   );
 
   const filteredRecipes = recipes.filter((recipe) => {
@@ -45,80 +46,138 @@ function Catalogo() {
     setFavorites((currentFavorites) =>
       currentFavorites.includes(id)
         ? currentFavorites.filter((favoriteId) => favoriteId !== id)
-        : [...currentFavorites, id],
+        : [...currentFavorites, id]
     );
   }
 
   if (loading) {
-    return <p>Carregando receitas...</p>;
+    return <p className="p-6 text-center">Carregando receitas...</p>;
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <p className="p-6 text-center text-red-600">{error}</p>;
   }
 
   return (
-    <main>
-      <h1>Receitário</h1>
-      <p>Encontre sua próxima receita favorita!</p>
+    <main className="min-h-screen bg-gray-50 p-6 text-gray-900 md:p-10">
+      <div className="mx-auto max-w-7xl">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-800">
+            Receitário
+          </h1>
+          <p className="mt-2 text-gray-600">
+            Encontre sua próxima receita favorita!
+          </p>
+        </header>
 
-      <div>
-        <label htmlFor="search">Pesquisar receita:</label>
-        <input
-          id="search"
-          type="text"
-          placeholder="Digite o nome da receita"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-        />
-      </div>
+        <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label
+              htmlFor="search"
+              className="mb-2 block text-sm font-medium text-gray-700"
+            >
+              Pesquisar receita
+            </label>
+            <input
+              id="search"
+              type="text"
+              placeholder="Digite o nome da receita"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              className="w-full rounded-lg border border-gray-300 bg-white p-3 focus:border-orange-500 focus:outline-none"
+            />
+          </div>
 
-      <div>
-        <label htmlFor="cuisine">Filtrar por culinária:</label>
-        <select
-          id="cuisine"
-          value={selectedCuisine}
-          onChange={(event) => setSelectedCuisine(event.target.value)}
-        >
-          <option value="">Todas as culinárias</option>
-          {cuisines.map((cuisine) => (
-            <option key={cuisine} value={cuisine}>
-              {cuisine}
-            </option>
-          ))}
-        </select>
-      </div>
+          <div>
+            <label
+              htmlFor="cuisine"
+              className="mb-2 block text-sm font-medium text-gray-700"
+            >
+              Filtrar por culinária
+            </label>
+            <select
+              id="cuisine"
+              value={selectedCuisine}
+              onChange={(event) => setSelectedCuisine(event.target.value)}
+              className="w-full rounded-lg border border-gray-300 bg-white p-3 focus:border-orange-500 focus:outline-none"
+            >
+              <option value="">Todas as culinárias</option>
+              {cuisines.map((cuisine) => (
+                <option key={cuisine} value={cuisine}>
+                  {cuisine}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
 
-      <p>{favorites.length} favoritas</p>
+        <p className="mb-5 text-sm text-gray-600">
+          {favorites.length} receitas favoritas
+        </p>
 
-      <section>
         {filteredRecipes.length === 0 ? (
-          <p>Nenhuma receita encontrada.</p>
+          <p className="py-12 text-center text-gray-500">
+            Nenhuma receita encontrada.
+          </p>
         ) : (
-          filteredRecipes.map((recipe) => {
-            const isFavorite = favorites.includes(recipe.id);
+          <section className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {filteredRecipes.map((recipe) => {
+              const isFavorite = favorites.includes(recipe.id);
 
-            return (
-              <article key={recipe.id}>
-                <img src={recipe.image} alt={recipe.name} width="200" />
-                <a href={`/receitas/${recipe.id}`}>Ver receita</a>
-                <p>Culinária: {recipe.cuisine}</p>
-                <p>
-                  Tempo total: {recipe.prepTimeMinutes + recipe.cookTimeMinutes}{" "}
-                  minutos
-                </p>
-                <button
-                  type="button"
-                  onClick={() => toggleFavorite(recipe.id)}
-                  aria-pressed={isFavorite}
+              return (
+                <article
+                  key={recipe.id}
+                  className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white"
                 >
-                  {isFavorite ? "★ Remover favorita" : "☆ Favoritar"}
-                </button>
-              </article>
-            );
-          })
+                  <a href={`/receitas/${recipe.id}`}>
+                    <img
+                      src={recipe.image}
+                      alt={recipe.name}
+                      className="h-48 w-full object-cover"
+                    />
+                  </a>
+
+                  <div className="flex flex-1 flex-col p-4">
+                    <span className="mb-3 self-start rounded-full bg-orange-100 px-3 py-1 text-sm text-orange-700">
+                      {recipe.cuisine}
+                    </span>
+
+                    <h2 className="mb-3 text-lg font-semibold text-gray-800">
+                      {recipe.name}
+                    </h2>
+
+                    <p className="mb-4 text-sm text-gray-500">
+                      ◷ {recipe.prepTimeMinutes + recipe.cookTimeMinutes} minutos
+                    </p>
+
+                    <div className="mt-auto space-y-2">
+                      <button
+                        type="button"
+                        onClick={() => toggleFavorite(recipe.id)}
+                        aria-pressed={isFavorite}
+                        className={`w-full rounded-lg border px-3 py-2 transition-colors ${
+                          isFavorite
+                            ? "border-red-200 bg-red-50 text-red-600"
+                            : "border-gray-300 text-gray-600 hover:bg-gray-100"
+                        }`}
+                      >
+                        {isFavorite ? "♥ Favorita" : "♡ Favoritar"}
+                      </button>
+
+                      <a
+                        href={`/receitas/${recipe.id}`}
+                        className="block w-full rounded-lg bg-orange-500 px-3 py-2 text-center font-medium text-white transition-colors hover:bg-orange-600"
+                      >
+                        Ver receita
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </section>
         )}
-      </section>
+      </div>
     </main>
   );
 }
