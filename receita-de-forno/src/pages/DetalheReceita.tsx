@@ -35,8 +35,8 @@ function DetalheReceita() {
 
   if (loading) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-gray-50 px-6">
-        <p className="animate-pulse text-lg font-medium text-orange-600">
+      <main className="flex min-h-screen items-center justify-center bg-gray-50 px-6 dark:bg-gray-950">
+        <p className="animate-pulse text-lg font-medium text-orange-600 dark:text-gray-100">
           Carregando receita...
         </p>
       </main>
@@ -45,12 +45,12 @@ function DetalheReceita() {
 
   if (error || !recipe) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-gray-50 px-6 text-center">
+      <main className="min-h-screen bg-white p-10 text-black dark:bg-gray-950 dark:text-white">
         <CookingPot size={48} className="text-orange-500" />
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
           Receita não encontrada
-        </h1>
-        <p className="text-gray-600">
+        </h2>
+        <p className="text-gray-600 dark:text-gray-300">
           Não conseguimos carregar essa receita. Tente novamente pelo catálogo.
         </p>
         <Link
@@ -66,7 +66,7 @@ function DetalheReceita() {
   const totalTime = recipe.prepTimeMinutes + recipe.cookTimeMinutes;
 
   return (
-    <main className="min-h-screen bg-orange-50/40 px-4 py-8 text-gray-800 sm:px-6 lg:px-10">
+    <main className="min-h-screen bg-orange-50/40 px-4 py-8 text-gray-800 dark:bg-gray-950 dark:text-gray-100 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-6xl">
         <Link
           to="/"
@@ -91,9 +91,9 @@ function DetalheReceita() {
                 {recipe.cuisine}
               </span>
 
-              <h1 className="text-3xl font-extrabold leading-tight text-gray-900 sm:text-4xl">
+              <h2 className="text-3xl font-extrabold leading-tight text-gray-900 sm:text-4xl">
                 {recipe.name}
-              </h1>
+              </h2>
 
               <p className="mt-4 text-gray-600">
                 Prepare essa receita seguindo os ingredientes e as instruções

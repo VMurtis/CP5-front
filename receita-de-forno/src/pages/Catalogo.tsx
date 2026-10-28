@@ -59,13 +59,13 @@ function Catalogo() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 p-6 text-gray-900 md:p-10">
+    <main className="min-h-screen bg-gray-50 p-6 text-gray-900 transition-colors md:p-10 dark:bg-gray-900 dark:text-gray-100">
       <div className="mx-auto max-w-7xl">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">
+          <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
             Receitário
-          </h1>
-          <p className="mt-2 text-gray-600">
+          </h2>
+          <p className="mt-2 text-gray-600 dark:text-gray-100">
             Encontre sua próxima receita favorita!
           </p>
         </header>
@@ -74,7 +74,7 @@ function Catalogo() {
           <div>
             <label
               htmlFor="search"
-              className="mb-2 block text-sm font-medium text-gray-700"
+              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-100"
             >
               Pesquisar receita
             </label>
@@ -91,7 +91,7 @@ function Catalogo() {
           <div>
             <label
               htmlFor="cuisine"
-              className="mb-2 block text-sm font-medium text-gray-700"
+              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-100"
             >
               Filtrar por culinária
             </label>
@@ -99,7 +99,7 @@ function Catalogo() {
               id="cuisine"
               value={selectedCuisine}
               onChange={(event) => setSelectedCuisine(event.target.value)}
-              className="w-full rounded-lg border border-gray-300 bg-white p-3 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-lg border border-gray-300 bg-white p-3 focus:border-orange-500 focus:outline-none "
             >
               <option value="">Todas as culinárias</option>
               {cuisines.map((cuisine) => (
@@ -111,7 +111,7 @@ function Catalogo() {
           </div>
         </div>
 
-        <p className="mb-5 text-sm text-gray-600">
+        <p className="mb-5 text-sm text-gray-600 dark:text-gray-100">
           {favorites.length} receitas favoritas
         </p>
 

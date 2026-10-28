@@ -1,10 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Catalogo from "./pages/Catalogo";
 import DetalheReceita from "./pages/DetalheReceita";
+import Cabecalho from "./components/Cabecalho";
 
 function App() {
   return (
     <BrowserRouter>
+      <Cabecalho />
       <Routes>
         <Route path="/" element={<Catalogo />} />
         <Route path="/receitas/:id" element={<DetalheReceita />} />
